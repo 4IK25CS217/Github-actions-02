@@ -1,18 +1,21 @@
-name: CI Workflow
+name: Python CI
 
 on:
   push:
-    branches: [ "main" ]
   pull_request:
-    branches: [ "main" ]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check out repository
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Run a one-line script
-      run: echo "GitHub Actions workflow executed successfully!"
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run Python program
+        run: python hello.py
